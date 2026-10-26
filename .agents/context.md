@@ -8,11 +8,11 @@
 - **Competitor Benchmark**: PKK Bakers (https://www.pkkbakers.com/)
 - **GitHub Repository**: [https://github.com/Femikf/fasobakes.git](https://github.com/Femikf/fasobakes.git) (Branch: `main`)
 - **Core Technology Stack**:
-  - Next.js 16 (App Router)
+  - Next.js 16 (App Router with Turbopack & Cache Components)
   - React 19
   - TypeScript
   - Pure Vanilla CSS / CSS Modules
-  - MongoDB Atlas Cloud Database (`vayaland.dcncnap.mongodb.net/faso`) with automatic BSON ObjectId serialization and in-memory fallback.
+  - MongoDB Atlas Cloud Database (`vayaland.dcncnap.mongodb.net/faso`) with automatic BSON ObjectId serialization and serverless connection pooling.
 
 ## Brand Identity & Aesthetic Guidelines
 - **Palette**:
@@ -31,37 +31,34 @@
   - Sliced Brown Bread, Sliced Long Bread, Sliced White Bread
   - Cashew Crunch Mini Cakes & Oven Fresh Brownies
 
-## Key Components & Upgrades Completed
-- `Favicon & Branding`:
-  - Generated `src/app/icon.png` (512x512) and multi-resolution `public/favicon.ico` and `src/app/favicon.ico` (16x16, 32x32, 48x48) from high-resolution FASO logo.
-  - Configured metadata in `src/app/layout.tsx` for optimal browser tab rendering and mobile bookmarking.
-- `Standardized Vector SVG Icons (`src/components/common/Icons.tsx`)`:
-  - Created standardized, brand-accurate SVG icon components: `WhatsAppIcon`, `InstagramIcon`, `YouTubeIcon`, `PhoneIcon`, `LocationIcon`, and `MailIcon`.
-  - Replaced all ad-hoc emojis and inconsistencies across `Navbar.tsx`, `Hero.tsx`, `Products.tsx`, `Process.tsx`, `Contact.tsx`, `Footer.tsx`, and `FloatingWhatsApp.tsx`.
-- `Clean Commercial Fleet Imagery`:
-  - Generated clean, artifact-free Ashok Leyland style commercial delivery trucks with authentic FASO Bakes branding on a scenic Wayanad mountain route (`public/images/faso-delivery-trucks.png`).
-- `Hero Showcase`: **Pure Full-Screen Video Hero with Dynamic Text Overlay (Tab-Free)**:
-  - Plays the 4-stage 360° rotating pedestal video (`/gemini_generated_video_a2de6f4c.mp4`) as an immersive full-screen background with multi-layered cinematic gradient scrim.
-  - Dynamically updates text overlay synchronized with the exact video timestamps:
-    - `0:00 - 2.5s`: **Multigrain Sliced Bread**
-    - `2.5s - 5.0s`: **Velveteen Cream Buns**
-    - `5.0s - 7.5s`: **Crispy Milk Rusks**
-    - `7.5s - 10.0s`: **Premium Italian Plum Cake**
-  - Retained docked live statistics counters bar (80+ Fresh Delicacies, 500+ Outlets, 50+ Fleet, 100% Hygiene).
-- `Dynamic Marquee & Looped Accordion`:
-  - `src/components/BannerShowcase` connected to `/api/banners` and `/admin/dashboard`.
-  - Infinite auto-cycling horizontal accordion with live MongoDB Atlas data.
-- `Database Integration`: **Live MongoDB Atlas Connection**:
-  - Connected directly to cloud cluster `vayaland.dcncnap.mongodb.net/faso`.
-  - 11 products and 3 banners seeded in Atlas collections.
-  - Protected security credentials: `.env.local` kept strictly ignored from Git while `.env.example` tracks template configuration.
-- `Version Control & Remote Deployment`:
-  - Git repository initialized on branch `main`.
-  - Comprehensive `README.md` created with project documentation.
-  - Successfully pushed code to `https://github.com/Femikf/fasobakes.git`.
+## Performance & Vercel Optimizations Implemented
+- `Vercel Serverless MongoDB Pooling (`src/lib/mongodb.ts`)`:
+  - Cached `global._mongoClientPromise` across serverless lambdas.
+  - Set `maxPoolSize: 10`, `serverSelectionTimeoutMS: 5000`, `connectTimeoutMS: 10000` to prevent connection spikes and cold start delays.
+- `Next.js & Edge CDN Cache (`next.config.ts`)`:
+  - Enabled modern image formats: `formats: ['image/avif', 'image/webp']`.
+  - Configured 1-year immutable edge cache headers (`Cache-Control: public, max-age=31536000, immutable`) for all images and the hero MP4 video.
+  - Added security headers: `X-DNS-Prefetch-Control`, `X-Content-Type-Options`, `Referrer-Policy`.
+  - Gzip and Brotli compression enabled (`compress: true`).
+- `Video & Hero Loading (LCP)`:
+  - Preloaded hero background image in `layout.tsx` (`<link rel="preload" as="image" href="/images/hero-video-poster.webp" type="image/webp" fetchpriority="high">`).
+  - Generated lightweight, 90KB WebP poster (`/images/hero-video-poster.webp`) so above-the-fold paint happens instantly before video stream starts.
+  - Video configured with `preload="metadata"`, `playsInline`, `muted`, `loop`, `autoPlay`.
+- `Image Optimization Across Components`:
+  - Added responsive `sizes` attribute and `loading="lazy"` across `Products.tsx`, `About.tsx`, and `Process.tsx`.
+  - Set `priority` on above-the-fold brand logo and primary banner.
+- `Interaction & Clicking Speed Optimizations (INP)`:
+  - Eliminated 300ms mobile touch delay with `touch-action: manipulation;` on all interactive links and buttons.
+  - Added tactile `:active { transform: scale(0.97); }` physical click feedback across primary, secondary, and gold buttons.
+  - Added `scroll-padding-top: 84px;` in `html` for smooth, header-aware anchor navigation without obscuring section titles.
+  - Enhanced Quick View modal with `Escape` keyboard dismissal and background body scroll locking.
 
-## Verification & Status
-- Production build (`npm run build`) compiled successfully with 0 errors.
-- Pushed to remote: `https://github.com/Femikf/fasobakes.git` (main branch).
-- Dev server running on `http://localhost:3000`.
-- All implementation plans archived in `.agents/`.
+## Verification & Deployment Status
+- Production build (`npm run build`) compiled successfully with 0 errors in 701ms.
+- All code changes, optimizations, and assets pushed to `https://github.com/Femikf/fasobakes.git` on branch `main`.
+- Vercel automatically deploys the latest commit upon push.
+- Environment variables configured for Vercel deployment:
+  - `MONGODB_URI`: MongoDB Atlas connection string
+  - `ADMIN_PASSWORD`: Admin dashboard password
+  - `JWT_SECRET`: Secret key for admin session tokens
+  - `NEXT_PUBLIC_SITE_URL`: Production domain URL
