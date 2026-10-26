@@ -32,6 +32,10 @@
   - Cashew Crunch Mini Cakes & Oven Fresh Brownies
 
 ## Performance & Vercel Optimizations Implemented
+- `Hero Flicker Elimination`:
+  - Promoted `.fullscreenVideo` and `.videoBackground` to dedicated GPU compositing layers via `transform: translate3d(0, 0, 0); backface-visibility: hidden; will-change: transform;`.
+  - Removed `backdrop-filter: blur(8px)` from `.stageBadge` and substituted it with high-contrast, GPU-safe solid amber tints (`rgba(32, 14, 7, 0.9)`), eliminating GPU raster tile invalidation flashes.
+  - Kept the parent `.overlayContent` container mounted without remounting, wrapping only the dynamic text in a `.textTransitionBox` with a non-zero initial opacity crossfade (`opacity: 0.35` -> `1`), preventing contrast drop flashes.
 - `Vercel Serverless MongoDB Pooling (`src/lib/mongodb.ts`)`:
   - Cached `global._mongoClientPromise` across serverless lambdas.
   - Set `maxPoolSize: 10`, `serverSelectionTimeoutMS: 5000`, `connectTimeoutMS: 10000` to prevent connection spikes and cold start delays.
@@ -54,9 +58,9 @@
   - Enhanced Quick View modal with `Escape` keyboard dismissal and background body scroll locking.
 
 ## Verification & Deployment Status
-- Production build (`npm run build`) compiled successfully with 0 errors in 701ms.
+- Production build (`npm run build`) compiled successfully with 0 errors.
 - All code changes, optimizations, and assets pushed to `https://github.com/Femikf/fasobakes.git` on branch `main`.
-- Vercel automatically deploys the latest commit upon push.
+- Vercel automatically deploys the latest commit (`28cafa4`).
 - Environment variables configured for Vercel deployment:
   - `MONGODB_URI`: MongoDB Atlas connection string
   - `ADMIN_PASSWORD`: Admin dashboard password
