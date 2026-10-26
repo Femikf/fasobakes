@@ -1,0 +1,191 @@
+.wrapRibbonContainer {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.ribbonSvgBack {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 16px rgba(50, 22, 14, 0.15));
+}
+
+.ribbonBackStroke {
+  animation: drawRibbonBack 6s ease-in-out infinite alternate;
+}
+
+.productStageWrapper {
+  position: relative;
+  z-index: 2;
+  width: 82%;
+  height: 82%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contactShadow {
+  position: absolute;
+  bottom: 12px;
+  width: 75%;
+  height: 32px;
+  background: radial-gradient(ellipse at center, rgba(42, 17, 7, 0.38) 0%, rgba(42, 17, 7, 0.12) 50%, transparent 75%);
+  border-radius: 50%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.ribbonSvgFront {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.ribbonFrontStroke {
+  animation: waveRibbon 4.5s ease-in-out infinite alternate;
+}
+
+.ribbonDashes {
+  animation: dashCycle 12s linear infinite;
+}
+
+.ribbonText {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 800;
+  fill: #FFFFFF;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.textTrack {
+  animation: scrollTextPath 18s linear infinite;
+}
+
+@keyframes scrollTextPath {
+  0% {
+    startOffset: 0%;
+  }
+  100% {
+    startOffset: -100%;
+  }
+}
+
+@keyframes dashCycle {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 300;
+  }
+}
+
+@keyframes waveRibbon {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(0.4deg);
+  }
+  100% {
+    transform: translateY(3px) rotate(-0.3deg);
+  }
+}
+
+@keyframes drawRibbonBack {
+  0% {
+    transform: translateY(0);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(-8px) scale(1.01);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(2px);
+    opacity: 0.95;
+  }
+}
+
+.ambientOrbitCircle {
+  position: absolute;
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(212, 168, 83, 0.3);
+  animation: spinCircle 35s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes spinCircle {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Floating Sparkles */
+.sparkle {
+  position: absolute;
+  font-size: 1.3rem;
+  pointer-events: none;
+  z-index: 4;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+}
+
+.sp1 {
+  top: 15%;
+  left: 6%;
+  animation: floatGentle 3.5s ease-in-out infinite;
+}
+
+.sp2 {
+  top: 10%;
+  right: 12%;
+  font-size: 1.6rem;
+  animation: floatGentle 4.2s ease-in-out infinite 0.8s;
+}
+
+.sp3 {
+  bottom: 22%;
+  left: 4%;
+  font-size: 1.2rem;
+  animation: floatGentle 3.8s ease-in-out infinite 1.4s;
+}
+
+.sp4 {
+  bottom: 12%;
+  right: 8%;
+  font-size: 1.5rem;
+  animation: floatGentle 4.5s ease-in-out infinite 2s;
+}
+
+@media (max-width: 768px) {
+  .wrapRibbonContainer {
+    height: 400px;
+  }
+  .ambientOrbitCircle {
+    width: 320px;
+    height: 320px;
+  }
+}

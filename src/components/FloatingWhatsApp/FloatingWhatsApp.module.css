@@ -1,0 +1,126 @@
+.floatingContainer {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.btnStack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.whatsappBtn {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.whatsappBtn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 32px rgba(37, 211, 102, 0.6);
+  background: #20BA5A;
+}
+
+.pulseRing {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  animation: pulseBeacon 2s infinite;
+  pointer-events: none;
+}
+
+.callBtn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(232, 117, 26, 0.25);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.callBtn:hover {
+  transform: scale(1.1);
+  background: var(--primary);
+  color: #FFFFFF;
+  box-shadow: 0 8px 22px rgba(232, 117, 26, 0.4);
+}
+
+.tooltipBox {
+  background: #FFFFFF;
+  padding: 14px 18px;
+  border-radius: 16px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  max-width: 260px;
+  animation: slideInUp 0.3s ease;
+}
+
+.tooltipHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  color: var(--secondary);
+  margin-bottom: 4px;
+}
+
+.onlineDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #25D366;
+  box-shadow: 0 0 6px #25D366;
+}
+
+.tooltipText {
+  font-size: 0.85rem;
+  color: var(--text-body);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.tooltipPhone {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--primary-dark);
+}
+
+@media (max-width: 768px) {
+  .floatingContainer {
+    bottom: 20px;
+    right: 20px;
+  }
+  .whatsappBtn {
+    width: 52px;
+    height: 52px;
+  }
+  .callBtn {
+    width: 42px;
+    height: 42px;
+  }
+}

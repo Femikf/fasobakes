@@ -1,0 +1,189 @@
+.turntableStage {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.turntableStage:active {
+  cursor: grabbing;
+}
+
+/* Background Spatial Watermark */
+.watermarkBackdrop {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-heading);
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(232, 117, 26, 0.07);
+  letter-spacing: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ambient Warm Spotlight */
+.ambientSpotlight {
+  position: absolute;
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #FFE5C4 0%, rgba(255, 229, 196, 0.35) 55%, transparent 75%);
+  filter: blur(28px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 360 Badge */
+.badge360 {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(212, 168, 83, 0.4);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--secondary);
+  box-shadow: 0 8px 20px rgba(50, 22, 14, 0.08);
+}
+
+.rotateIcon {
+  font-size: 1rem;
+  color: var(--primary);
+  display: inline-block;
+  animation: spinIcon 6s linear infinite;
+}
+
+@keyframes spinIcon {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Turntable 3D Platform */
+.turntablePlatform {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease-out;
+}
+
+.productFrame {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.productImage {
+  max-width: 100%;
+  max-height: 400px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 20px;
+  filter: drop-shadow(0 20px 28px rgba(50, 22, 14, 0.2));
+  pointer-events: none;
+}
+
+/* Grounding Pedestal Shadow */
+.pedestalShadow {
+  width: 70%;
+  height: 28px;
+  background: radial-gradient(ellipse at center, rgba(35, 14, 5, 0.5) 0%, rgba(35, 14, 5, 0.15) 55%, transparent 75%);
+  border-radius: 50%;
+  margin-top: -18px;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+/* Control Bar */
+.turntableControls {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 4;
+}
+
+.spinToggleBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-medium);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--secondary);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.spinToggleBtn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.activeSpinBtn {
+  background: var(--bg-cream);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.dragHint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .turntableStage {
+    min-height: 380px;
+  }
+  .watermarkBackdrop {
+    font-size: 3.5rem;
+  }
+  .productFrame {
+    height: 300px;
+  }
+  .productImage {
+    max-height: 280px;
+  }
+  .badge360 {
+    top: 0;
+    right: 5px;
+    font-size: 0.72rem;
+  }
+}

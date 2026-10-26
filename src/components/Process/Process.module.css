@@ -1,0 +1,183 @@
+.processSection {
+  padding: 100px 0;
+  background: #FFFFFF;
+  position: relative;
+}
+
+.headerArea {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 50px;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  margin-bottom: 70px;
+}
+
+.stepCard {
+  background: var(--bg-main);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 28px 24px;
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+}
+
+.stepCard:hover {
+  transform: translateY(-6px);
+  border-color: var(--primary);
+  background: #FFFFFF;
+  box-shadow: 0 14px 32px rgba(50, 22, 14, 0.08);
+}
+
+.stepHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.stepNumber {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--accent-gold);
+  line-height: 1;
+}
+
+.stepIconBox {
+  font-size: 1.6rem;
+  background: #FFFFFF;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.stepTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--secondary);
+  margin-bottom: 8px;
+}
+
+.stepDesc {
+  font-size: 0.9rem;
+  color: var(--text-body);
+  line-height: 1.5;
+}
+
+/* Fleet Spotlight Banner */
+.fleetSpotlight {
+  background: radial-gradient(circle at 10% 10%, #FFF7EE 0%, #F5ECDD 100%);
+  border-radius: 28px;
+  padding: 40px;
+  border: 1px solid var(--border-medium);
+  box-shadow: 0 16px 40px rgba(50, 22, 14, 0.06);
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.fleetVisual {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 14px 32px rgba(50, 22, 14, 0.16);
+}
+
+.fleetImage {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.fleetImage:hover {
+  transform: scale(1.04);
+}
+
+.fleetPill {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: rgba(30, 11, 6, 0.85);
+  backdrop-filter: blur(8px);
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.fleetContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.fleetTitle {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--secondary);
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+
+.fleetDesc {
+  font-size: 1.05rem;
+  color: var(--text-body);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.fleetFeatures {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+  padding: 18px 0;
+  border-top: 1px solid var(--border-medium);
+  border-bottom: 1px solid var(--border-medium);
+}
+
+.fleetFeat {
+  display: flex;
+  flex-direction: column;
+}
+
+.fleetFeat strong {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.fleetFeat span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.fleetCtaRow {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 992px) {
+  .fleetSpotlight {
+    grid-template-columns: 1fr;
+    padding: 28px;
+  }
+  .fleetFeatures {
+    grid-template-columns: 1fr;
+  }
+}
