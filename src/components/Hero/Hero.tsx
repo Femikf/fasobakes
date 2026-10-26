@@ -137,51 +137,53 @@ export default function Hero({ banners }: HeroProps = {}) {
 
       {/* Dynamic Text Content Overlay (Pure & Distraction-Free) */}
       <div className={`container ${styles.overlayContainer}`}>
-        <div className={styles.overlayContent} key={current.id}>
-          {/* Active Product Category Badge */}
-          <div className={styles.badgeRow}>
-            <span className={styles.stageBadge}>{current.badge}</span>
-            <span className={styles.originTag}>Wayanad, Kerala</span>
-          </div>
+        <div className={styles.overlayContent}>
+          <div className={styles.textTransitionBox} key={current.id}>
+            {/* Active Product Category Badge */}
+            <div className={styles.badgeRow}>
+              <span className={styles.stageBadge}>{current.badge}</span>
+              <span className={styles.originTag}>Wayanad, Kerala</span>
+            </div>
 
-          {/* Dynamic Headline */}
-          <h1 className={styles.overlayTitle}>
-            {current.titlePrefix}
-            <span className={styles.highlightText}>{current.titleHighlight}</span>
-          </h1>
+            {/* Dynamic Headline */}
+            <h1 className={styles.overlayTitle}>
+              {current.titlePrefix}
+              <span className={styles.highlightText}>{current.titleHighlight}</span>
+            </h1>
 
-          {/* Dynamic Subtitle */}
-          <p className={styles.overlaySubtitle}>{current.subtitle}</p>
+            {/* Dynamic Subtitle */}
+            <p className={styles.overlaySubtitle}>{current.subtitle}</p>
 
-          {/* Call-to-Action Buttons */}
-          <div className={styles.ctaRow}>
-            <Link href={current.ctaLink} className="btn-primary">
-              {current.ctaText}
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </Link>
+            {/* Call-to-Action Buttons */}
+            <div className={styles.ctaRow}>
+              <Link href={current.ctaLink} className="btn-primary">
+                {current.ctaText}
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </Link>
 
-            <a
-              href={`https://wa.me/919544408674?text=${encodeURIComponent(current.waText)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.overlayWhatsAppBtn}
-            >
-              <WhatsAppIcon size={18} color="#25D366" />
-              <span>WhatsApp Order</span>
-            </a>
-          </div>
+              <a
+                href={`https://wa.me/919544408674?text=${encodeURIComponent(current.waText)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.overlayWhatsAppBtn}
+              >
+                <WhatsAppIcon size={18} color="#25D366" />
+                <span>WhatsApp Order</span>
+              </a>
+            </div>
 
-          {/* Craft Highlights */}
-          <div className={styles.specsList}>
-            {current.highlights.map((h, i) => (
-              <div key={i} className={styles.specTag}>
-                <span className={styles.checkMark}>✓</span>
-                <span>{h}</span>
-              </div>
-            ))}
+            {/* Craft Highlights */}
+            <div className={styles.specsList}>
+              {current.highlights.map((h, i) => (
+                <div key={i} className={styles.specTag}>
+                  <span className={styles.checkMark}>✓</span>
+                  <span>{h}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
