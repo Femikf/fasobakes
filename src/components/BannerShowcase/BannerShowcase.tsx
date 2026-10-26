@@ -137,7 +137,9 @@ export default function BannerShowcase({ banners }: BannerShowcaseProps) {
                     alt={banner.title}
                     fill
                     className={styles.cardBgImg}
-                    sizes="(max-width: 768px) 100vw, 800px"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 800px"
+                    priority={idx === 0}
+                    loading={idx === 0 ? 'eager' : 'lazy'}
                   />
                   <div className={styles.cardGradientOverlay}></div>
                 </div>

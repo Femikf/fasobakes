@@ -119,12 +119,12 @@ export default function Hero({ banners }: HeroProps = {}) {
         <video
           ref={videoRef}
           src="/gemini_generated_video_a2de6f4c.mp4"
-          poster="/images/hero_video_frame0.jpg"
+          poster="/images/hero-video-poster.webp"
           autoPlay
           loop
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
           onTimeUpdate={handleTimeUpdate}
           className={styles.fullscreenVideo}
           aria-label="FASO Bakes 360 rotating showcase of multigrain bread, cream buns, milk rusks, and Italian plum cake"

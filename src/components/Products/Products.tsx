@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { WhatsAppIcon } from '@/components/common/Icons';
@@ -22,6 +22,22 @@ const CATEGORIES = [
 export default function Products({ products = INITIAL_BREADS }: ProductsProps) {
   const [activeCategory, setActiveCategory] = useState('all');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedProduct(null);
+    };
+    if (selectedProduct) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedProduct]);
 
   const displayList = products.filter((p) => p.isActive);
   const filteredProducts =
@@ -74,6 +90,8 @@ export default function Products({ products = INITIAL_BREADS }: ProductsProps) {
                     alt={product.name}
                     width={360}
                     height={300}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
+                    loading="lazy"
                     className={styles.cardImage}
                   />
                 </div>
@@ -125,7 +143,13 @@ export default function Products({ products = INITIAL_BREADS }: ProductsProps) {
 
         {/* Quick View Modal */}
         {selectedProduct && (
-          <div className={styles.modalBackdrop} onClick={() => setSelectedProduct(null)}>
+          <div
+            className={styles.modalBackdrop}
+            onClick={() => setSelectedProduct(null)}
+            role="dialog"
+            aria-modal="true"
+            aria-label={selectedProduct.name}
+          >
             <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
               <button
                 className={styles.closeModalBtn}
@@ -142,6 +166,8 @@ export default function Products({ products = INITIAL_BREADS }: ProductsProps) {
                     alt={selectedProduct.name}
                     width={380}
                     height={340}
+                    sizes="(max-width: 768px) 100vw, 400px"
+                    priority
                     className={styles.modalImage}
                   />
                 </div>

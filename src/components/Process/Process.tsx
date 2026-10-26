@@ -89,9 +89,11 @@ export default function Process() {
           <div className={styles.fleetVisual}>
             <Image
               src="/images/faso-delivery-trucks.png"
-              alt="FASO Bakes 50+ Ashok Leyland Delivery Fleet"
+              alt="FASO Bakes 50+ Dedicated Delivery Fleet"
               width={560}
               height={420}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 560px"
+              loading="lazy"
               className={styles.fleetImage}
             />
             <div className={styles.fleetPill}>

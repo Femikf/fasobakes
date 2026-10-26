@@ -1,7 +1,11 @@
 import { MongoClient, Db } from 'mongodb';
 
 const uri = process.env.MONGODB_URI || '';
-const options = {};
+const options = {
+  maxPoolSize: 10,
+  serverSelectionTimeoutMS: 5000,
+  connectTimeoutMS: 10000,
+};
 
 let client: MongoClient | null = null;
 let clientPromise: Promise<MongoClient> | null = null;
@@ -12,16 +16,12 @@ declare global {
 }
 
 if (uri) {
-  if (process.env.NODE_ENV === 'development') {
-    if (!global._mongoClientPromise) {
-      client = new MongoClient(uri, options);
-      global._mongoClientPromise = client.connect();
-    }
-    clientPromise = global._mongoClientPromise;
-  } else {
+  // In serverless environments (like Vercel), preserve the client promise across warm executions
+  if (!global._mongoClientPromise) {
     client = new MongoClient(uri, options);
-    clientPromise = client.connect();
+    global._mongoClientPromise = client.connect();
   }
+  clientPromise = global._mongoClientPromise;
 }
 
 export async function getDatabase(): Promise<Db | null> {

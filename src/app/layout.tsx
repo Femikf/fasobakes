@@ -52,6 +52,14 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/hero-video-poster.webp"
+          type="image/webp"
+          // @ts-expect-error fetchpriority is standard in modern HTML
+          fetchpriority="high"
+        />
       </head>
       <body>{children}</body>
     </html>

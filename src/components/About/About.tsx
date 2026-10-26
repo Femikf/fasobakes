@@ -14,6 +14,8 @@ export default function About() {
               alt="FASO Bakes Master Baker - Baking Delectable Dreams"
               width={600}
               height={700}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+              loading="lazy"
               className={styles.mainImage}
             />
             <div className={styles.brandBadgeOver}>
@@ -29,6 +31,8 @@ export default function About() {
               alt="Freshly baked mini plum cakes with cashews"
               width={260}
               height={260}
+              sizes="(max-width: 768px) 130px, 260px"
+              loading="lazy"
               className={styles.insetImage}
             />
             <div className={styles.insetText}>

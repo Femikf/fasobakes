@@ -69,6 +69,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 84px;
   font-size: 16px;
 }
 
@@ -93,6 +94,7 @@ a {
   color: inherit;
   text-decoration: none;
   transition: var(--transition-fast);
+  touch-action: manipulation;
 }
 
 img {
@@ -108,6 +110,13 @@ button {
   background: none;
   outline: none;
   transition: var(--transition-fast);
+  touch-action: manipulation;
+}
+
+button:active,
+a.btn-primary:active,
+a.btn-secondary:active {
+  transform: scale(0.97);
 }
 
 input, textarea, select {
@@ -226,6 +235,13 @@ input, textarea, select {
 .btn-gold:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 30px rgba(212, 168, 83, 0.45);
+}
+
+.btn-primary:active,
+.btn-secondary:active,
+.btn-gold:active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 4px 12px rgba(50, 22, 14, 0.15);
 }
 
 /* Animations */
